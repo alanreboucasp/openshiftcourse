@@ -154,11 +154,6 @@ jobs:
         sed -i 's|\${APP_NAME}|'"$APP_NAME"'|g' route.yaml
         sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' route.yaml
         oc get pods
-        echo "Deleting the resources"
-        oc delete -f pod.yaml
-        oc delete -f deployment.yaml
-        oc delete -f service.yaml
-        oc delete -f route.yaml
         echo "Recreating the resources"
         oc apply -f pod.yaml
         oc apply -f deployment.yaml
