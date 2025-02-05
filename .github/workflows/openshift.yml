@@ -142,4 +142,5 @@ jobs:
     - name: My Deployment
       run: |
         echo ${{ steps.push-image.outputs.registry-path }}
-        oc get pods 
+        oc get pods
+        oc apply -f pod.yaml
