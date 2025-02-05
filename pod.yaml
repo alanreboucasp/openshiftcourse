@@ -9,4 +9,3 @@ spec:
       image: ${IMAGE}
       ports:
         - containerPort: 8080
- 
