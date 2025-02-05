@@ -142,11 +142,13 @@ jobs:
     - name: My Deployment
       run: |
         export IMAGE=${{ steps.push-image.outputs.registry-path }}
-        export APP_NAME=${{ APP_NAME }}
-        export OPENSHIFT_NAMESPACE=${{ OPENSHIFT_NAMESPACE }}
+        export APP_NAME=${{ env.APP_NAME }}
+        export OPENSHIFT_NAMESPACE=${{ env.OPENSHIFT_NAMESPACE }}
 
         echo ${{ steps.push-image.outputs.registry-path }}
-        sed -i 's|\${IMAGE}|'"$IMAGE"'|g' pod.yaml
+        sed -i 's|\${IMAGE}|'"$IMAGE"'|g' deployment.yaml
+        sed -i 's|\${APP_NAME}|'"$APP_NAME"'|g' deployment.yaml
+        sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' deployment.yaml
         oc get pods
         oc apply -f pod.yaml
         oc apply -f deployment.yaml
