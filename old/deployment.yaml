@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_NAME}
+  namespace: ${OPENSHIFT_NAMESPACE}
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  selector:
+    matchLabels:
+      app: ${APP_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${APP_NAME}
+    spec:
+      imagePullSecrets:
+        - name: ghcr-pull-secret
+      containers:
+      - name: ${APP_NAME}
+        image: ${IMAGE}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
