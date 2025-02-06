@@ -148,7 +148,7 @@ jobs:
         echo ${{ steps.push-image.outputs.registry-path }}
         sed -i 's|\${IMAGE}|'"$IMAGE"'|g' deployment.yaml
         sed -i 's|\${APP_NAME}|'"$APP_NAME"'|g' deployment.yaml
-        sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' base/service.yaml route.yaml base/configmap-w-storage.yaml  base/deployment-w-storage.yaml base/pvc.yaml
+        sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' base/service.yaml base/route.yaml base/configmap-w-storage.yaml  base/deployment-w-storage.yaml base/pvc.yaml base/secret.yaml
 
         oc get pods
         echo "Recreating the resources"
