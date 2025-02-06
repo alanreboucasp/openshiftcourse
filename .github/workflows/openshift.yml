@@ -149,8 +149,8 @@ jobs:
         echo Namespace = ${{ env.OPENSHIFT_NAMESPACE }}
         echo APP-name = ${{ env.APP_NAME }}
         sed -i 's|\${IMAGE}|'"$IMAGE"'|g' base/deployment-w-storage.yaml
-        sed -i 's|\${APP_NAME}|'"$APP_NAME"'|g' base/service.yaml base/route.yaml base/configmap-w-storage.yaml  base/deployment-w-storage.yaml base/pvc.yaml base/secret.yaml
-        sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' base/service.yaml base/route.yaml base/configmap-w-storage.yaml  base/deployment-w-storage.yaml base/pvc.yaml base/secret.yaml
+        sed -i 's|\${APP_NAME}|'"$APP_NAME"'|g' base/service.yaml base/route.yaml base/configmap-w-storage.yaml  base/deployment-w-storage.yaml base/pvc.yaml base/secret.yaml /overlays/release/configmap-patch.yaml
+        sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' base/service.yaml base/route.yaml base/configmap-w-storage.yaml  base/deployment-w-storage.yaml base/pvc.yaml base/secret.yaml /overlays/release/configmap-patch.yaml 
 
         oc get pods
         echo "mostrando os kustomize"
