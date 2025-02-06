@@ -148,15 +148,9 @@ jobs:
         echo ${{ steps.push-image.outputs.registry-path }}
         sed -i 's|\${IMAGE}|'"$IMAGE"'|g' deployment.yaml
         sed -i 's|\${APP_NAME}|'"$APP_NAME"'|g' deployment.yaml
-        sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' deployment.yaml
-        sed -i 's|\${APP_NAME}|'"$APP_NAME"'|g' service.yaml
-        sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' service.yaml
-        sed -i 's|\${APP_NAME}|'"$APP_NAME"'|g' route.yaml
-        sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' route.yaml
+        sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' base/service.yaml route.yaml base/configmap-w-storage.yaml  base/deployment-w-storage.yaml base/pvc.yaml
+
         oc get pods
         echo "Recreating the resources"
-        oc apply -f pod.yaml
-        oc apply -f deployment.yaml
-        oc apply -f service.yaml
-        oc apply -f route.yaml
+        oc apply -k overlays/release/
         oc get pods
