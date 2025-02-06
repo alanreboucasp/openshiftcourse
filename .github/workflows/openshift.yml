@@ -153,6 +153,8 @@ jobs:
         sed -i 's|\${OPENSHIFT_NAMESPACE}|'"$OPENSHIFT_NAMESPACE"'|g' base/service.yaml base/route.yaml base/configmap-w-storage.yaml  base/deployment-w-storage.yaml base/pvc.yaml base/secret.yaml
 
         oc get pods
+        echo "mostrando os kustomize"
+        oc kustomize overlays/release/
         echo "Recreating the resources"
         oc apply -k overlays/release/
         oc get pods
